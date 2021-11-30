@@ -13,16 +13,17 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:shrine/supplemental/asymmetric_view.dart';
-
 import 'model/products_repository.dart';
 import 'model/product.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final Category category;
 
+  const HomePage({this.category = Category.all, Key? key}) : super(key: key);
+
+  // ignore: unused_element
   List<Card> _buildGridCards(BuildContext context) {
     List<Product> products = ProductsRepository.loadProducts(Category.all);
 
@@ -56,10 +57,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
-
-           
                   children: <Widget>[
-          
                     Text(
                       product.name,
                       style: theme.textTheme.button,
@@ -67,7 +65,6 @@ class HomePage extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                     ),
-
                     const SizedBox(height: 4.0),
                     Text(
                       formatter.format(product.price),
@@ -83,51 +80,8 @@ class HomePage extends StatelessWidget {
     }).toList();
   }
 
-  // TODO: Add a variable for Category (104)
   @override
   Widget build(BuildContext context) {
-    // TODO: Return an AsymmetricView (104)
-    // TODO: Pass Category variable to AsymmetricView (104)
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('SHRINE'),
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-          onPressed: () {
-            // ignore: avoid_print
-            print('Menu button');
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
-            ),
-            onPressed: () {
-              // ignore: avoid_print
-              print('Search button');
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
-            ),
-            onPressed: () {
-              // ignore: avoid_print
-              print('Filter button');
-            },
-          ),
-        ],
-      ),
-      body: AsymmetricView(
-          products: ProductsRepository.loadProducts(Category.all)),
-      resizeToAvoidBottomInset: false,
-    );
+    return AsymmetricView(products: ProductsRepository.loadProducts(category));
   }
 }
