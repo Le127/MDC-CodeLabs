@@ -1,6 +1,9 @@
 # MDC-100 Series of Codelabs
 
-## Getting Started
+CodeLabs
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+"Flutter: Material Components (MDC) Basics (Flutter)"
+
+https://codelabs.developers.google.com/codelabs/mdc-101-flutter#0
+
+
